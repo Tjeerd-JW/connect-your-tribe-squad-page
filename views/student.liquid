@@ -1,5 +1,8 @@
 {% render 'partials/head.liquid', title: person.name %}
 
 <a href="/">Back</a>
+{{ person | json |  escape}}
+
+       {{person.mughsot |  escape}}
 
 {% render 'partials/foot.liquid', squads: squads %}

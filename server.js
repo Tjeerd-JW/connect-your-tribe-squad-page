@@ -37,14 +37,14 @@ app.use(express.static('public'))
 
 // Stel Liquid in als 'view engine'
 const engine = new Liquid();
-app.engine('liquid', engine.express()); 
+app.engine('liquid', engine.express());
 
 // Stel de map met Liquid templates in
 // Let op: de browser kan deze bestanden niet rechtstreeks laden (zoals voorheen met HTML bestanden)
 app.set('views', './views')
 
 // Zorg dat werken met request data (volgende week) makkelijker wordt
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 
 
 // Om Views weer te geven, heb je Routes nodig
@@ -77,7 +77,7 @@ app.get('/', async function (request, response) {
 
   // Render index.liquid uit de views map en geef de opgehaalde data mee als variabele, genaamd persons
   // Geef ook de eerder opgehaalde squad data mee aan de view
-  response.render('index.liquid', {persons: personResponseJSON.data, squads: squadResponseJSON.data})
+  response.render('index.liquid', { persons: personResponseJSON.data, squads: squadResponseJSON.data })
 })
 
 // Maak een POST route voor de index; hiermee kun je bijvoorbeeld formulieren afvangen
@@ -95,10 +95,10 @@ app.get('/student/:id', async function (request, response) {
   const personDetailResponse = await fetch('https://fdnd.directus.app/items/person/' + request.params.id)
   // En haal daarvan de JSON op
   const personDetailResponseJSON = await personDetailResponse.json()
-  
+
   // Render student.liquid uit de views map en geef de opgehaalde data mee als variable, genaamd person
   // Geef ook de eerder opgehaalde squad data mee aan de view
-  response.render('student.liquid', {person: personDetailResponseJSON.data, squads: squadResponseJSON.data})
+  response.render('student.liquid', { person: personDetailResponseJSON.data, squads: squadResponseJSON.data })
 })
 
 
