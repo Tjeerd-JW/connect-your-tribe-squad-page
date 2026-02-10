@@ -14,6 +14,7 @@
       </p>
       <img
         class="person-img"
+        loading="lazy"
         {% if person.mugshot %}
           src="{{'https://fdnd.directus.app/assets/' | append:  person.mugshot | append:'?width=500' }}"
         {% else %}
