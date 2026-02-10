@@ -3,14 +3,24 @@
 <h2>Students</h2>
 <ul class="people-list">
   {% for person in persons %}
-    <li class="people-card" style="background-color: {{ person.fav_color }};">
+    <li class="people-card" style="--favo-color:{{ person.fav_color }};">
       <a href="/student/{{ person.id }}">
-        <h3 class="person-name">{{ person.github_handle }}</h3>
+        <h3 class="person-name">
+          {{ person.github_handle }}
+        </h3>
       </a>
 
-      <p class="person-team">{{ person.team }}</p>
-      <p class="person-hp">{{ person.shoe_size | default: 40 }} hp</p>
-      <img class="person-img" src="{{person.avatar}}" alt=" {{ person.name }}">
+      {% comment %} <p class="person-team">{{ person.team }}</p> {% endcomment %}
+      <p class="person-hp">{{ person.shoe_size | default: 32 }} hp</p>
+      <img
+        class="person-img"
+        {% if person.mugshot %}
+          src="{{'https://fdnd.directus.app/assets/' | append:  person.mugshot | append:'?width=500' }}"
+        {% else %}
+          src="{{ person.avatar }}"
+        {% endif %}
+        alt=" {{ person.name }}"
+      >
       <p class="person-move">
         Kan {{ person.id }} damage doen door een {{ person.fav_attribute | escape }} op een
         {{ person.fav_tag | escape }}

@@ -11,11 +11,18 @@
     gap: .5rem;
 
     .people-card {
-        height: 500px;
-        width: 250px;
+        width: clamp(320px, 30dvw, 400px);
+        aspect-ratio:  5 / 7;
         border: solid 2px black;
         grid-template-columns: 1fr 1fr 1fr;
         display: grid;
+        --favo-color: unset;
+        background-color: var(--favo-color);
+        color: contrast-color(var(--favo-color));
+        background-image: url('img/backdrop.png');
+        background-blend-mode: multiply;
+        border: solid 10px yellow;
+        border-radius: 10px;
 
         a {
             text-decoration: none;
@@ -50,16 +57,18 @@
             padding: 0 20px;
         }
 
-    
+
 
 
 
         img {
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 10 / 7;
             object-fit: cover;
             grid-column: 1 / -1;
-            width: 230px;
-            padding: 0 10px;
+            width: 90%;
+            border: solid 5px yellow;
+            border-radius: 2px;
+            justify-self: center;
         }
 
 

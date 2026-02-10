@@ -1,8 +1,20 @@
 {% render 'partials/head.liquid', title: person.name %}
 
 <a href="/">Back</a>
-{{ person | json |  escape}}
+{{ person | json | escape }}
 
-       {{person.mughsot |  escape}}
+{{ person.mughsot | escape }}
+
+<iframe
+  data-testid="embed-iframe"
+  style="border-radius:12px"
+  src="https://open.spotify.com/embed/track/1a8JpAL3vbAdXYrEABvOtb?utm_source=generator"
+  width="100%"
+  height="352"
+  frameBorder="0"
+  allowfullscreen=""
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+  loading="lazy"
+></iframe>
 
 {% render 'partials/foot.liquid', squads: squads %}
