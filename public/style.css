@@ -3,18 +3,25 @@
     padding: 0;
 }
 
+body{
+    background-color: black;
+    color: white;
+}
+
 .people-list {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: .5rem;
+    gap: 1.5rem;
 
     .people-card {
         width: clamp(320px, 30dvw, 400px);
-        aspect-ratio:  5 / 7;
+        aspect-ratio: 5 / 7;
         border: solid 2px black;
         grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 30px 2fr 1fr 1fr 1fr 1fr;
+        gap: 5px;
         display: grid;
         --favo-color: unset;
         background-color: var(--favo-color);
@@ -29,6 +36,7 @@
             color: unset;
             grid-column: 1 / 3;
             height: 20px;
+            margin: 5px 0 0 0;
 
             .person-name {
                 padding: 0 0 0 10px;
@@ -37,40 +45,40 @@
             }
         }
 
-        .person-team {
-            grid-column: 1;
-            padding: 0 0 0 10px;
-            font-size: 1rem;
-            height: 20px;
-        }
-
         .person-hp {
             grid-column: 3;
             grid-row: 1;
             text-wrap: nowrap;
             padding: 0 10px 0 0;
             text-align: right;
+            margin: 5px 0 0 0;
+            height: 20px;
+
         }
 
-        .person-move {
+        h4 {
+            padding: 0 20px;
+
+        }
+
+        .person-ability {
             grid-column: 1 / -1;
             padding: 0 20px;
         }
 
-
-
-
+        .person-move {
+            grid-column: 1 / -1;
+            padding: 0 20px 5px 20px;
+        }
 
         img {
             aspect-ratio: 10 / 7;
             object-fit: cover;
             grid-column: 1 / -1;
             width: 90%;
-            border: solid 5px yellow;
-            border-radius: 2px;
+            border: ridge 5px lightgray;
             justify-self: center;
         }
-
 
     }
 }

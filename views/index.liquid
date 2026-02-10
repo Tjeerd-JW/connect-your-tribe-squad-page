@@ -9,9 +9,9 @@
           {{ person.github_handle }}
         </h3>
       </a>
-
-      {% comment %} <p class="person-team">{{ person.team }}</p> {% endcomment %}
-      <p class="person-hp">{{ person.shoe_size | default: 32 }} hp</p>
+      <p class="person-hp">
+        hp <span>{{ person.shoe_size | default: 32 }}</span> <span>{{ person.vibe_emoji }}</span>
+      </p>
       <img
         class="person-img"
         {% if person.mugshot %}
@@ -21,6 +21,13 @@
         {% endif %}
         alt=" {{ person.name }}"
       >
+
+      <h4><span>Ability</span></h4>
+      <p class="person-ability">
+        Zolang team {{ person.team }} actief is, kan je tegenstander geen layout shift voorkomen. Wanneer
+        {{ person.fav_feature }} wordt getriggerd, zet je een {{ person.fav_emoji }} op je tegenstander.
+      </p>
+      <h4>Moveset</h4>
       <p class="person-move">
         Kan {{ person.id }} damage doen door een {{ person.fav_attribute | escape }} op een
         {{ person.fav_tag | escape }}
@@ -30,12 +37,6 @@
         Kan {{ person.fav_border_radius | escape }} hp herstellen als het {{ person.fav_season }} is en er
         {{ person.fav_animal }} aanwezig is in {{ person.residency }}
       </p>
-      <p class="person-move">
-        Wanneer {{ person.name }} op het veld is met andere van team {{ person.team }} kan {{ person.fav_emoji }}
-        ingezet worden.
-      </p>
-
-      {% comment %} {{person.mugshot }} {% endcomment %}
     </li>
   {% endfor %}
 </ul>

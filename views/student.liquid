@@ -5,10 +5,12 @@
 
 {{ person.mughsot | escape }}
 
+{% assign spotifyURL = person.fav_spotify_track | split: '/' %}
+
 <iframe
   data-testid="embed-iframe"
   style="border-radius:12px"
-  src="https://open.spotify.com/embed/track/1a8JpAL3vbAdXYrEABvOtb?utm_source=generator"
+  src="https://open.spotify.com/embed/track/{{ spotifyURL[4] |   default: '0NjEIcUU7PqfFCKVElxKn1' }}?utm_source=generator"
   width="100%"
   height="352"
   frameBorder="0"
