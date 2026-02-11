@@ -53,8 +53,15 @@ app.get('/', async function (request, response) {
 
   // Haal alle personen uit de WHOIS API op, van dit jaar, gesorteerd op naam
   const params = {
+
+    // 'sort': (request.query.sorteer == 'andersom' ? '-name' : 'name'),
+
+    // 'sort': (request.query.sorteer == 'schoenmaat' ? '-shoe_size' : 'shoe_size'),
+
+    // 'filter[squads][squad_id][name][persons][name]': 'Tjeerd Wokke',
+
     // Sorteer op naam
-    'sort': 'name',
+    // 'sort': 'name',
 
     // Geef aan welke data je per persoon wil terugkrijgen
     'fields': '*,squads.*',
@@ -66,8 +73,9 @@ app.get('/', async function (request, response) {
     // 'filter[squads][squad_id][name]': '1J',
     'filter[squads][squad_id][cohort]': '2526'
   }
-  const personResponse = await fetch('https://fdnd.directus.app/items/person/?' + new URLSearchParams(params))
 
+
+  const personResponse = await fetch('https://fdnd.directus.app/items/person/?' + new URLSearchParams(params))
   // En haal daarvan de JSON op
   const personResponseJSON = await personResponse.json()
 
@@ -80,11 +88,56 @@ app.get('/', async function (request, response) {
   response.render('index.liquid', { persons: personResponseJSON.data, squads: squadResponseJSON.data })
 })
 
+app.get('/haarcrisis', async function (request, response) {
+
+  const params = {
+    'fields': '*,squads.*',
+
+    // Combineer meerdere filters
+    'filter[squads][squad_id][tribe][name]': 'FDND Jaar 1',
+    'filter[squads][squad_id][cohort]': '2526',
+    'filter[is_bold]': 'true'
+  }
+  const personResponse = await fetch('https://fdnd.directus.app/items/person/?' + new URLSearchParams(params))
+  const personResponseJSON = await personResponse.json()
+  response.render('index.liquid', { persons: personResponseJSON.data, squads: squadResponseJSON.data })
+
+})
 // Maak een POST route voor de index; hiermee kun je bijvoorbeeld formulieren afvangen
 app.post('/', async function (request, response) {
   // Je zou hier data kunnen opslaan, of veranderen, of wat je maar wilt
   // Er is nog geen afhandeling van POST, redirect naar GET op /
   response.redirect(303, '/')
+})
+
+app.get('/seizoen/:fav_season', async function (request, response) {
+  const params = {
+    'fields': '*,squads.*',
+
+    // Combineer meerdere filters
+    'filter[squads][squad_id][tribe][name]': 'FDND Jaar 1',
+    'filter[squads][squad_id][cohort]': '2526',
+    'filter[fav_season][_icontains]': request.params.fav_season
+  }
+  const personResponse = await fetch('https://fdnd.directus.app/items/person/?' + new URLSearchParams(params))
+  const personResponseJSON = await personResponse.json()
+  response.render('index.liquid', { persons: personResponseJSON.data, squads: squadResponseJSON.data })
+
+})
+
+app.get('/game/:fav_game', async function (request, response) {
+  const params = {
+    'fields': '*,squads.*',
+
+    // Combineer meerdere filters
+    'filter[squads][squad_id][tribe][name]': 'FDND Jaar 1',
+    'filter[squads][squad_id][cohort]': '2526',
+    'filter[fav_game][_icontains]': request.params.fav_game
+  }
+  const personResponse = await fetch('https://fdnd.directus.app/items/person/?' + new URLSearchParams(params))
+  const personResponseJSON = await personResponse.json()
+  response.render('index.liquid', { persons: personResponseJSON.data, squads: squadResponseJSON.data })
+
 })
 
 
