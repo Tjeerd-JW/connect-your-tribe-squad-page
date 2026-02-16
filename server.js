@@ -155,6 +155,46 @@ app.get('/student/:id', async function (request, response) {
 })
 
 
+let comments = []
+
+app.get('/comments', async function (request, response) {
+
+  const params = {
+    'filter[for]': 'Team Delight',
+  }
+
+  const apiURL = 'https://fdnd.directus.app/items/messages?' + new URLSearchParams(params)
+  const messagesResponse = await fetch(apiURL)
+  const messagesResponseJSON = await messagesResponse.json()
+
+  response.render('comments.liquid', {
+    comments: messagesResponseJSON.data
+  })
+})
+
+
+app.post('/comments', async function (request, response) {
+
+  await fetch('https://fdnd.directus.app/items/messages', {
+
+    method: 'POST',
+
+    body: JSON.stringify({
+      for: 'Team Delight',
+      text: request.body.comments,
+      from: request.body.from
+    }),
+
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+
+  })
+  response.redirect(303, '/comments')
+
+
+})
+
 // Stel het poortnummer in waar express op moet gaan luisteren
 app.set('port', process.env.PORT || 8000)
 

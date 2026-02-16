@@ -1,0 +1,21 @@
+<form method="post" action="/comments">
+  <label>
+    comment
+    <input type="text" name="comments">
+  </label>
+  <label>
+    je naam
+    <input type="text" name="from">
+  </label>
+  <button type="submit">comment</button>
+</form>
+
+<section style="display: flex; flex-direction: column-reverse;">
+{% for comment in comments %}
+  <article>
+    <h2>{{ comment.from }}</h2>
+    <p>{{ comment.text }}</p>
+  </article>
+{% endfor %}
+</section>
+
